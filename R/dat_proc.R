@@ -16,7 +16,7 @@ prstr <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
 flw_pth <- 'M:/Data/RaphaelMazor/Santa Margarita Case Study/SMR_NHDPlus.shp'
 shd_pth <- 'M:/Data/RaphaelMazor/Santa Margarita Case Study/SMR_Sheds.shp'
 scr_pth <- 'ignore/csci_061917.csv'
-exp_pth <- 'ignore/comid_statewide.Rdata'
+exp_pth <- 'ignore/comid_prd.Rdata'
 
 # stream expectations, named comid
 load(file = exp_pth)
@@ -71,7 +71,7 @@ for(shd in shds){
   # create spatial polyines from shed intersect, left_join with csci scrs
   spat_tmp <- spat %>%
     st_intersection(shd_tmp) %>% 
-    left_join(comid, by = 'COMID') %>% 
+    left_join(comid_prd, by = 'COMID') %>% 
     select(COMID, matches('^full0'))
   
   # csci scores
